@@ -1,7 +1,6 @@
 package com.helha.java.q2.terminal.Controllers;
 
 import com.helha.java.q2.terminal.Views.BancontactViewController;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,25 +19,12 @@ public class BancontactController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/helha/java/q2/terminal/bancontact.fxml"));
             Parent root = loader.load();
-            setBancontactViewController(loader.getController());
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void updateMontantLabel(Double montant) {
-        // Exécutez cette mise à jour dans le thread de l'interface utilisateur
-        Platform.runLater(() -> {
-            // Assurez-vous que bancontactViewController n'est pas null avant d'appeler setMontant
-            if (bancontactViewController != null) {
-                bancontactViewController.setMontant(montant);
-            } else {
-                System.err.println("bancontactViewController est null");
-            }
-        });
-    }
 }
